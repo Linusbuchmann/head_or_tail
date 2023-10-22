@@ -3,8 +3,6 @@
 use eframe::egui;
 use rand::prelude::*;
 
-
-
 fn main() -> Result<(), eframe::Error> {
     env_logger::init(); // Log to stderr (if you run with `RUST_LOG=debug`).
     
@@ -67,10 +65,9 @@ fn main() -> Result<(), eframe::Error> {
                     credits_var += 10;   
                 }
             });
-
         }
-
     });
+
 // mhm....
     if checkbox_bool == false {
         checkbox_string = "heads";
