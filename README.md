@@ -11,3 +11,5 @@ With the slider you can choose how much you want to bet
 
 With the little clickbox you can choose if you want to bet on head or tails
 
+And with the button that says "click" you can bet
+
