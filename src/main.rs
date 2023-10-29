@@ -33,6 +33,7 @@ fn main() -> Result<(), eframe::Error> {
     let mut checkbox_bool = false;
     let mut checkbox_string = "heads_tails";
     let mut win_or_lose: &str = "";
+    let mut no_money: bool = false;
 
     eframe::run_simple_native("Head or tails", options, move |ctx, _frame| {
         egui::CentralPanel::default().show(ctx, |ui| {
@@ -45,7 +46,7 @@ fn main() -> Result<(), eframe::Error> {
         ui.horizontal(|ui| {
             ui.add(egui::Slider::new(&mut bet_value, 0..=credits_var));
             ui.add(egui::Checkbox::new(&mut checkbox_bool, checkbox_string));
-            if ui.button("Click").clicked() {
+            if ui.add_enabled(no_money,egui::Button::new("Click")).clicked() {
                 heads_tails_var = rand::thread_rng().gen_range(1..3);
                 if checkbox_string == heads_tails_string {
                     credits_var += bet_value;
@@ -62,13 +63,22 @@ fn main() -> Result<(), eframe::Error> {
         if credits_var <= 0 {
             ui.with_layout(egui::Layout::bottom_up(egui::Align::BOTTOM), |ui| {
                 if ui.button("MONEY").clicked() {
-                    credits_var += 10;   
+                    credits_var = 10;
+                    bet_value = 10;   
                 }
             });
         }
     });
 
 // mhm....
+
+    if credits_var >= 1 {
+        no_money = true;
+    }
+    else if credits_var <= 1 {
+        no_money = false;
+    }
+
     if checkbox_bool == false {
         checkbox_string = "heads";
     }
